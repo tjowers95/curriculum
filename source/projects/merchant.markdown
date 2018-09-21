@@ -918,7 +918,7 @@ Product.find_or_initialize_by_id(5)
 Product.find_or_initialize_by_title "Apples"
 ```
 
-The `find_or_initialize_by_` method will first attempt to find a match
+The `find_or_initialize_by` method will first attempt to find a match
 in the database for the specified attribute and value. If it finds one,
 that object will be returned. If it **doesn’t** find a match, it will
 build one in memory and return the new object.
@@ -930,7 +930,7 @@ like this:
 
 ```ruby
 def load_order
-  @order = Order.find_or_initialize_by_id(session[:order_id], status: "unsubmitted")
+  @order = Order.find_or_initialize_by(id: session[:order_id], status: "unsubmitted")
   if @order.new_record?
     @order.save!
     session[:order_id] = @order.id
